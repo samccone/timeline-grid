@@ -7,7 +7,7 @@ pixels per second to a nice grid
   new timelineGrid({
     appendTo: <domNode>, //defaults to body
     seconds: 50, //duration required*
-    pps: 50, //pixels per second requres*
+    pps: 50, //pixels per second required*
     height: 10 //height of primary lines defaults to 50,
     fillStyle: "red",
     fontStyle: "15px Helvetica",
