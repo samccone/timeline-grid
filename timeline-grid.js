@@ -60,7 +60,7 @@
 
       o = this.options;
       this.ctx.font = o.fontStyle;
-      for (i = _i = 0, _ref = o.seconds - 1; 0.5 > 0 ? _i <= _ref : _i >= _ref; i = _i += 0.5) {
+      for (i = _i = 0, _ref = o.seconds; 0.5 > 0 ? _i < _ref : _i > _ref; i = _i += 0.5) {
         h = i % 1 ? (o.height - o.vertPadding) / 2 : o.height - o.vertPadding;
         x = i * o.pps + o.lineWidth / 2 + o.horzPadding;
         y = o.height - h + o.horzPadding;

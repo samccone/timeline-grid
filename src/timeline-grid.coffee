@@ -61,7 +61,7 @@ class @timelineGrid
     o = @options # just a short hand for this fun
     @ctx.font = o.fontStyle
 
-    for i in [0 .. o.seconds - 1] by 0.5
+    for i in [0 ... o.seconds] by 0.5
       h = if i % 1 then (o.height - o.vertPadding)/2 else o.height - o.vertPadding
       x = i * o.pps + o.lineWidth/2 + o.horzPadding
       y = o.height - h + o.horzPadding
