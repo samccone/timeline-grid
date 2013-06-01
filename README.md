@@ -11,7 +11,9 @@ pixels per second to a nice grid
     height: 10 //height of primary lines defaults to 50,
     fillStyle: "red",
     fontStyle: "15px Helvetica",
-    lineWidth: 5
+    lineWidth: 5,
+    fillStyle: "red", //default is black
+    fontFillStyle: "orange" //default is black
   });
 ```
 

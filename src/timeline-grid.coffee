@@ -17,6 +17,7 @@ class @timelineGrid
     @options.lineWidth      = @options.lineWidth or 4
     @options.fontStyle      = @options.fontStyle or '15px Helvetica'
     @options.fillStyle      = @options.fillStyle or "black"
+    @options.fontFillStyle  = @options.fontFillStyle or @options.fillStyle
 
     @options.height         = (@options.height * @retina or 50 * @retina) + @options.vertPadding
     @options.width          = @options.seconds * @options.pps + @options.horzPadding
@@ -29,7 +30,9 @@ class @timelineGrid
     @canvas.style.width  = "#{@options.width / @retina}px"
     @canvas.style.height = "#{@options.height / @retina}px"
 
-    @ctx      = @canvas.getContext '2d'
+    @ctx                 = @canvas.getContext '2d'
+    @ctx.fillStyle       = @options.fillStyle
+
     @options.appendTo.appendChild @canvas
     @draw()
 
@@ -44,7 +47,6 @@ class @timelineGrid
   draw: ->
     o = @options # just a short hand for this fun
     @ctx.font       = o.fontStyle
-    @ctx.fillStyle  = o.fillStyle
 
     for i in [0 .. o.seconds - 1] by 0.5
       h = if i % 1 then (o.height - o.vertPadding)/2 else o.height - o.vertPadding
@@ -52,12 +54,15 @@ class @timelineGrid
       y = o.height - h + o.horzPadding
 
       if !(i % 1)
-        timeStamp = @formatTime(i+1)
-        metrics   = @ctx.measureText timeStamp #textwidth
+        timeStamp       = @formatTime(i+1)
+        metrics         = @ctx.measureText timeStamp #textwidth
+        if o.fillStyle != o.fontFillStyle then @ctx.fillStyle = o.fontFillStyle
+
         @ctx.fillText @formatTime(i+1),
                       x - metrics.width/2 + o.lineWidth/2,
                       @options.vertPadding / 2
 
+      if o.fillStyle   != o.fontFillStyle then @ctx.fillStyle = o.fillStyle
       @ctx.rect x,
                 o.height - h,
                 o.lineWidth,

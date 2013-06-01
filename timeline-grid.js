@@ -16,6 +16,7 @@
       this.options.lineWidth = this.options.lineWidth || 4;
       this.options.fontStyle = this.options.fontStyle || '15px Helvetica';
       this.options.fillStyle = this.options.fillStyle || "black";
+      this.options.fontFillStyle = this.options.fontFillStyle || this.options.fillStyle;
       this.options.height = (this.options.height * this.retina || 50 * this.retina) + this.options.vertPadding;
       this.options.width = this.options.seconds * this.options.pps + this.options.horzPadding;
       this.canvas = document.createElement('canvas');
@@ -24,6 +25,7 @@
       this.canvas.style.width = "" + (this.options.width / this.retina) + "px";
       this.canvas.style.height = "" + (this.options.height / this.retina) + "px";
       this.ctx = this.canvas.getContext('2d');
+      this.ctx.fillStyle = this.options.fillStyle;
       this.options.appendTo.appendChild(this.canvas);
       this.draw();
     }
@@ -43,7 +45,6 @@
 
       o = this.options;
       this.ctx.font = o.fontStyle;
-      this.ctx.fillStyle = o.fillStyle;
       for (i = _i = 0, _ref = o.seconds - 1; 0.5 > 0 ? _i <= _ref : _i >= _ref; i = _i += 0.5) {
         h = i % 1 ? (o.height - o.vertPadding) / 2 : o.height - o.vertPadding;
         x = i * o.pps + o.lineWidth / 2 + o.horzPadding;
@@ -51,7 +52,13 @@
         if (!(i % 1)) {
           timeStamp = this.formatTime(i + 1);
           metrics = this.ctx.measureText(timeStamp);
+          if (o.fillStyle !== o.fontFillStyle) {
+            this.ctx.fillStyle = o.fontFillStyle;
+          }
           this.ctx.fillText(this.formatTime(i + 1), x - metrics.width / 2 + o.lineWidth / 2, this.options.vertPadding / 2);
+        }
+        if (o.fillStyle !== o.fontFillStyle) {
+          this.ctx.fillStyle = o.fillStyle;
         }
         this.ctx.rect(x, o.height - h, o.lineWidth, h);
       }
