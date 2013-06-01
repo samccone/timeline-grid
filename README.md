@@ -4,7 +4,7 @@ pixels per second to a nice grid
 ![screen shot](https://raw.github.com/samccone/timeline-grid/master/screenshot.png "screen shot")
 
 ```js
-  new timelineGrid({
+  grid = new timelineGrid({
     appendTo: <domNode>, //defaults to body
     seconds: 50, //duration required*
     pps: 50, //pixels per second required*
@@ -17,6 +17,13 @@ pixels per second to a nice grid
   });
 ```
 
+
+#### interface
+
+```js
+  grid.changePps(<pixels per second>)
+  grid.changeDuration(<seconds>)
+```
 
 #### to dev
 

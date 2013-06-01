@@ -40,6 +40,21 @@
       return "" + tenM + oneM + ":" + seconds;
     };
 
+    timelineGrid.prototype.changeDuration = function(duration) {
+      this.options.seconds = duration;
+      this.ctx.clearRect(0, 0, this.options.width, this.options.height);
+      this.options.width = this.options.seconds * this.options.pps + this.options.horzPadding;
+      this.canvas.setAttribute('width', this.options.width);
+      this.canvas.style.width = "" + (this.options.width / this.retina) + "px";
+      this.ctx = this.canvas.getContext('2d');
+      return this.draw();
+    };
+
+    timelineGrid.prototype.changePps = function(pps) {
+      this.options.pps = pps;
+      return this.changeDuration(this.options.seconds);
+    };
+
     timelineGrid.prototype.draw = function() {
       var h, i, metrics, o, timeStamp, x, y, _i, _ref;
 

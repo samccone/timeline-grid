@@ -44,9 +44,22 @@ class @timelineGrid
 
     "#{tenM}#{oneM}:#{seconds}"
 
+  changeDuration: (duration) ->
+    @options.seconds = duration
+    @ctx.clearRect 0, 0, @options.width, @options.height
+    @options.width = @options.seconds * @options.pps + @options.horzPadding
+    @canvas.setAttribute 'width', @options.width
+    @canvas.style.width = "#{@options.width / @retina}px"
+    @ctx = @canvas.getContext '2d'
+    @draw()
+
+  changePps: (pps) ->
+    @options.pps = pps
+    @changeDuration(@options.seconds)
+
   draw: ->
     o = @options # just a short hand for this fun
-    @ctx.font       = o.fontStyle
+    @ctx.font = o.fontStyle
 
     for i in [0 .. o.seconds - 1] by 0.5
       h = if i % 1 then (o.height - o.vertPadding)/2 else o.height - o.vertPadding
