@@ -1,6 +1,8 @@
 #### Timeline grid
 pixels per second to a nice grid
 
+![screen shot](https://raw.github.com/samccone/timeline-grid/master/screenshot.png "screen shot")
+
 ```js
   new timelineGrid({
     appendTo: <domNode>, //defaults to body
@@ -12,3 +14,11 @@ pixels per second to a nice grid
     lineWidth: 5
   });
 ```
+
+
+#### to dev
+
+```
+  cake watch
+```
+
