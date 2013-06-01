@@ -1,0 +1,25 @@
+{
+  "name": "timeline-grid",
+  "version": "0.1.0",
+  "description": "pixels per second to a nice grid",
+  "main": "timeline-grid.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/samccone/timeline-grid.git"
+  },
+  "devDependencies": {
+    "coffee-script": "1.6.2",
+    "colors": "0.6.0-1",
+    "monocle": "0.1.47"
+  },
+  "keywords": [
+    "timeline",
+    "canvas",
+  ],
+  "author": "Sam Saccone",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+}

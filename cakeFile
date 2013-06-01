@@ -1,0 +1,19 @@
+fs            = require 'fs'
+colors        = require 'colors'
+coffeeScript  = require 'coffee-script'
+Monocle       = require('monocle')()
+
+task "watch", ->
+  console.log "watching files".yellow;
+  Monocle.watchDirectory
+    root: __dirname + "/src/"
+    listener: (change) ->
+      fs.readFile change.fullPath, "utf8", (e, d) ->
+        try
+          compiled = coffeeScript.compile(d)
+        catch e
+          console.log "ERROR COMPILING #{change.name}".red
+          console.log e
+          return
+        fs.writeFile __dirname + "/#{change.name.split('.')[0]}.js", compiled, (e, d) ->
+          console.log "Compiled #{change.name}".green.inverse
