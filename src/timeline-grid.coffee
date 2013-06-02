@@ -9,13 +9,16 @@ class @timelineGrid
 
     @options.horzPadding    = 20 * @retina
     @options.vertPadding    = 20 * @retina
+    @options.fontSize       = @options.fontSize * @retina or 15 * @retina
+    @options.font           = @options.font or "Helvetica"
 
     @options.appendTo       = @options.appendTo or document.body
 
     @options.pps            = @options.pps * @retina
 
-    @options.lineWidth      = @options.lineWidth or 4
-    @options.fontStyle      = @options.fontStyle or '15px Helvetica'
+    @options.stampEvery     = @options.stampEvery or 1
+    @options.lineWidth      = @options.lineWidth * @retina or 4 * @retina
+    @options.fontStyle      = "#{@options.fontSize}px #{@options.font}"
     @options.fillStyle      = @options.fillStyle or "black"
     @options.fontFillStyle  = @options.fontFillStyle or @options.fillStyle
 
@@ -71,9 +74,10 @@ class @timelineGrid
         metrics         = @ctx.measureText timeStamp #textwidth
         if o.fillStyle != o.fontFillStyle then @ctx.fillStyle = o.fontFillStyle
 
-        @ctx.fillText @formatTime(i+1),
-                      x - metrics.width/2 + o.lineWidth/2,
-                      @options.vertPadding / 2
+        if !(!i or (i+1)%o.stampEvery)
+          @ctx.fillText @formatTime(i+1),
+                        x - metrics.width/2 + o.lineWidth/2,
+                        @options.vertPadding / 2
 
       if o.fillStyle   != o.fontFillStyle then @ctx.fillStyle = o.fillStyle
       @ctx.rect x,
